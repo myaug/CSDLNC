@@ -28,12 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.sqlUserControl1 = new CSDLNC.SQLUserControl();
+            this.SuspendLayout();
+            // 
+            // sqlUserControl1
+            // 
+            this.sqlUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.sqlUserControl1.Location = new System.Drawing.Point(544, 5);
+            this.sqlUserControl1.Name = "sqlUserControl1";
+            this.sqlUserControl1.Size = new System.Drawing.Size(578, 518);
+            this.sqlUserControl1.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1123, 525);
+            this.Controls.Add(this.sqlUserControl1);
+            this.Name = "Form1";
             this.Text = "Form1";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private SQLUserControl sqlUserControl1;
     }
 }
 

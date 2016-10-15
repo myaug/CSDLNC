@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 
@@ -9,17 +10,22 @@ namespace CSDLNC.SQL
 {
     public class SQLHelper
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-
+        //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
+        public string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        
         SqlConnection connection;
 
         public SQLHelper() {
+            
         }
 
         public SqlConnection OpenConnection()
         {
-            connection = new SqlConnection(connectionString);
-            connection.Open();
+            if(connection == null)
+                connection = new SqlConnection(connectionString);
+         
+            if(connection.State == ConnectionState.Closed)
+                connection.Open();
 
             return connection;
         }
@@ -56,17 +62,65 @@ namespace CSDLNC.SQL
             {
                 CloseConnection();
             }
-            finally
-            {
-                CloseConnection();
-            }
 
             return 0;
         }
 
-        public void Delete()
+        public long Delete(int player_id, int player_fifa_api_id, int player_api_id)
         {
+            try
+            {
+                using (SqlConnection connection = OpenConnection())
+                {
+                    var deleteMatchCmd = new SqlCommand("delete M from Match M"
+                                                        + "where M.away_player_1 = @playerId"
+                                                        + "OR M.away_player_2 = @playerId"
+                                                        + "OR M.away_player_3 = @playerId"
+                                                        + "OR M.away_player_4 = @playerId"
+                                                        + "OR M.away_player_5 = @playerId"
+                                                        + "OR M.away_player_6 = @playerId"
+                                                        + "OR M.away_player_7 = @playerId"
+                                                        + "OR M.away_player_8 = @playerId"
+                                                        + "OR M.away_player_9 = @playerId"
+                                                        + "OR M.away_player_10 = @playerId"
+                                                        + "OR M.away_player_11 = @playerId"
+                                                        + "OR M.home_player_1 = @playerId"
+                                                        + "OR M.home_player_2 = @playerId"
+                                                        + "OR M.home_player_3 = @playerId"
+                                                        + "OR M.home_player_4 = @playerId"
+                                                        + "OR M.home_player_5 = @playerId"
+                                                        + "OR M.home_player_6 = @playerId"
+                                                        + "OR M.home_player_7 = @playerId"
+                                                        + "OR M.home_player_8 = @playerId"
+                                                        + "OR M.home_player_9 = @playerId"
+                                                        + "OR M.home_player_10 = @playerId"
+                                                        + "OR M.home_player_11 = @playerId");
+                    deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
+                    var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
+                                                                + "where PS.player_api_id = @player_api_id"
+                                                                + "and PS.player_fifa_api_id = @player_fifa_api_id");
+                    deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
+                    deletePlayerStatCmd.Parameters.AddWithValue("@player_fifa_api_id", player_fifa_api_id);
+
+                    var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
+                    deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
+
+                    var sw = Stopwatch.StartNew();
+
+                    deleteMatchCmd.ExecuteNonQuery();
+                    deletePlayerStatCmd.ExecuteNonQuery();
+                    deletePlayerCmd.ExecuteNonQuery();
+
+                    sw.Stop();
+                    return sw.ElapsedMilliseconds;
+                }
+            }
+            catch (Exception ex)
+            {
+                CloseConnection();
+            }
+            return 0;
         }
 
         public long Update(string playerName, string birthday, string preferredFoot)
@@ -90,10 +144,6 @@ namespace CSDLNC.SQL
 
             }
             catch (Exception ex)
-            {
-                CloseConnection();
-            }
-            finally
             {
                 CloseConnection();
             }
@@ -150,25 +200,28 @@ namespace CSDLNC.SQL
             {
                 CloseConnection();
             }
-            finally
-            {
-                CloseConnection();
-            }
 
             return players;
         }
 
-        public int Count(string tableName, SqlConnection connection)
+        public int NumberOfRecord(string tableName)
         {
-            SqlCommand cmd = new SqlCommand("SELECT COUNT(1) AS [Count] FROM " + tableName , connection);
-            using (SqlDataReader reader = cmd.ExecuteReader())
+            try
             {
-                while (reader.Read())
+                SqlConnection connection = OpenConnection();
+                SqlCommand cmd = new SqlCommand("SELECT COUNT(1) AS [Count] FROM " + tableName, connection);
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
-                    return int.Parse(reader["Count"].ToString());
+                    while (reader.Read())
+                    {
+                        return int.Parse(reader["Count"].ToString());
+                    }
                 }
             }
-
+            catch(Exception ex)
+            {
+                CloseConnection();
+            }
             return 0;
         }
     }

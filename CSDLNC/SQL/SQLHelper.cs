@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
@@ -11,14 +8,13 @@ namespace CSDLNC.SQL
     public class SQLHelper
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-        //public string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = CSDLNC; Integrated Security = True";
+        private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        //public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = CSDLNC; Integrated Security = True";
 
-        SqlConnection connection;
+        private SqlConnection connection;
+        public long timeExecution = 0;
 
-        public SQLHelper() {
-            
-        }
+        public SQLHelper() {}
 
         public SqlConnection OpenConnection()
         {
@@ -37,7 +33,7 @@ namespace CSDLNC.SQL
                 connection.Close();
         }
 
-        public long Insert(Player player)
+        public void Insert(Player player)
         {
             try
             {
@@ -46,7 +42,6 @@ namespace CSDLNC.SQL
                     var cmd = new SqlCommand("INSERT INTO PLAYER VALUES(@player_api_id, @player_name, @player_fifa_api_id, @birthday, @height, @weight)", connection);
                     cmd.Parameters.AddWithValue("@player_api_id", player.Player_api_id);
                     cmd.Parameters.AddWithValue("@player_name", player.Player_name);
-                    cmd.Parameters.AddWithValue("@player_fifa_api_id", player.Player_fifa_api_id);
                     cmd.Parameters.AddWithValue("@birthday", player.Birthday);
                     cmd.Parameters.AddWithValue("@height", player.Height);
                     cmd.Parameters.AddWithValue("@weight", player.Weight);
@@ -56,18 +51,16 @@ namespace CSDLNC.SQL
                     cmd.ExecuteNonQuery();
 
                     sw.Stop();
-                    return sw.ElapsedMilliseconds;
+                    timeExecution = sw.ElapsedMilliseconds;
                 }
             }
             catch (Exception ex)
             {
                 CloseConnection();
             }
-
-            return 0;
         }
 
-        public long Delete(int player_id, int player_fifa_api_id, int player_api_id)
+        public long Delete(int player_id, int player_api_id)
         {
             try
             {
@@ -99,10 +92,8 @@ namespace CSDLNC.SQL
                     deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
                     var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
-                                                                + "where PS.player_api_id = @player_api_id"
-                                                                + "and PS.player_fifa_api_id = @player_fifa_api_id");
+                                                                + "where PS.player_api_id = @player_api_id");
                     deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
-                    deletePlayerStatCmd.Parameters.AddWithValue("@player_fifa_api_id", player_fifa_api_id);
 
                     var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
                     deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
@@ -151,58 +142,73 @@ namespace CSDLNC.SQL
             return 0;
         }
 
-        public List<Player> Select()
+        public DataTable Select()
         {
-            var players = new List<Player>();
+            //var players = new List<Player>();
 
             try
             {
-                using (SqlConnection connection = OpenConnection())
-                {
-                    var cmd = new SqlCommand("select P.*, T.overal_rating from Player P"
-                                               + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
-                                               + " from Player_Stats s"
-                                               + " group by s.player_api_id"
-                                               + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id", connection);
+                SqlConnection connection = OpenConnection();
+                string selectCmd = "select P.*, T.overal_rating from Player P"
+                                            + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
+                                            + " from Player_Stats s"
+                                            + " group by s.player_api_id"
+                                            + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCmd, connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
 
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        int count = 0;
-                        int player_api_id, player_fifa_api_id, height, weight, overal_rating;
-                        string player_name, birthday;
-                        while (reader.Read())
-                        {
-                            if (count == 1000) return players;
+                var sw = Stopwatch.StartNew();
 
-                            player_api_id = int.Parse(reader["player_api_id"].ToString());
-                            player_fifa_api_id = int.Parse(reader["player_fifa_api_id"].ToString());
-                            player_name = reader["player_name"].ToString();
-                            birthday = reader["birthday"].ToString();
-                            height = int.Parse(reader["height"].ToString());
-                            weight = int.Parse(reader["weight"].ToString());
-                            overal_rating = int.Parse(reader["overal_rating"].ToString());
+                dataAdapter.Fill(table);
 
-                            players.Add(new Player()
-                            {
-                                Player_fifa_api_id = player_fifa_api_id,
-                                Player_api_id = player_api_id,
-                                Player_name = player_name,
-                                Birthday = birthday,
-                                Height = height,
-                                Weight = weight
-                            });
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
 
-                            count++;
-                        }
-                    }
-                }
+                return table;
+
+                    //var cmd = new SqlCommand("select P.*, T.overal_rating from Player P"
+                    //                           + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
+                    //                           + " from Player_Stats s"
+                    //                           + " group by s.player_api_id"
+                    //                           + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id", connection);
+
+                    //using (SqlDataReader reader = cmd.ExecuteReader())
+                    //{
+                    //    int count = 0;
+                    //    int player_api_id, height, weight, overal_rating;
+                    //    string player_name, birthday;
+                    //    while (reader.Read())
+                    //    {
+                    //        if (count == 1000) return players;
+
+                    //        player_api_id = int.Parse(reader["player_api_id"].ToString());
+                    //        player_name = reader["player_name"].ToString();
+                    //        birthday = reader["birthday"].ToString();
+                    //        height = int.Parse(reader["height"].ToString());
+                    //        weight = int.Parse(reader["weight"].ToString());
+                    //        overal_rating = int.Parse(reader["overal_rating"].ToString());
+
+                    //        players.Add(new Player()
+                    //        {
+                    //            Player_api_id = player_api_id,
+                    //            Player_name = player_name,
+                    //            Birthday = birthday,
+                    //            Height = height,
+                    //            Weight = weight
+                    //        });
+
+                    //        count++;
+                    //    }
+                    //}
             }
             catch (Exception ex)
             {
                 CloseConnection();
             }
 
-            return players;
+            return null;
         }
 
         public int NumberOfRecord(string tableName)

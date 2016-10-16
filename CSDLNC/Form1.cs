@@ -24,7 +24,6 @@ namespace CSDLNC
             Player player = new Player()
             {
                 Player_api_id = 123456,
-                Player_fifa_api_id = 654321,
                 Player_name = "Hoang Minh",
                 Birthday = "1990-02-29 00:00:00",
                 Height = 182880000,

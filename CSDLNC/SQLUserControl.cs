@@ -21,11 +21,12 @@ namespace CSDLNC
         public SQLUserControl()
         {
             InitializeComponent();
-
-            bindNumberOfRecord();
+            BindNumberOfRecord();
+            BindPlayerList();
+            InitInsertData();
         }
 
-        public void bindNumberOfRecord()
+        private void BindNumberOfRecord()
         {
             country_lbl.Text = helper.NumberOfRecord("Country") + numberRecordSuffix;
             league_lbl.Text = helper.NumberOfRecord("League") + numberRecordSuffix;
@@ -37,7 +38,37 @@ namespace CSDLNC
 
         private void btn_Select_Click(object sender, EventArgs e)
         {
+            bindingSourcePLayerList.DataSource = helper.Select();
+            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
+        }
+        
+        private void BindPlayerList()
+        {
+            playerList.DataSource = bindingSourcePLayerList;
+        }
 
+        private void InitInsertData()
+        {
+            txt_apiId.Text = "80000";
+            txt_name.Text = "Ronaldo";
+            txt_birthday.Text = "1990-02-29 00:00:00";
+            txt_height.Text = "182880000";
+            txt_weight.Text = "187";
+            txt_preferred_foot.Text = "right";
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            Player player = new Player()
+            {
+                Player_api_id = int.Parse(txt_apiId.Text),
+                Player_name = txt_name.Text,
+                Birthday = txt_birthday.Text,
+                Height = int.Parse(txt_height.Text),
+                Weight = int.Parse(txt_weight.Text)
+            };
+            helper.Insert(player);
+            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,8 +47,22 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lbl_time = new System.Windows.Forms.Label();
-            this.player_list = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.player_list)).BeginInit();
+            this.playerList = new System.Windows.Forms.DataGridView();
+            this.bindingSourcePLayerList = new System.Windows.Forms.BindingSource(this.components);
+            this.txt_apiId = new System.Windows.Forms.TextBox();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.txt_weight = new System.Windows.Forms.TextBox();
+            this.txt_height = new System.Windows.Forms.TextBox();
+            this.txt_birthday = new System.Windows.Forms.TextBox();
+            this.txt_preferred_foot = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.playerList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePLayerList)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -203,6 +218,7 @@
             this.btn_add.TabIndex = 14;
             this.btn_add.Text = "Add New Player";
             this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // btn_update
             // 
@@ -236,20 +252,134 @@
             this.lbl_time.TabIndex = 17;
             this.lbl_time.Text = "12ms";
             // 
-            // player_list
+            // playerList
             // 
-            this.player_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.player_list.Location = new System.Drawing.Point(21, 216);
-            this.player_list.Name = "player_list";
-            this.player_list.Size = new System.Drawing.Size(535, 285);
-            this.player_list.TabIndex = 18;
+            this.playerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.playerList.Location = new System.Drawing.Point(21, 271);
+            this.playerList.Name = "playerList";
+            this.playerList.Size = new System.Drawing.Size(547, 274);
+            this.playerList.TabIndex = 18;
+            // 
+            // txt_apiId
+            // 
+            this.txt_apiId.Location = new System.Drawing.Point(20, 238);
+            this.txt_apiId.Name = "txt_apiId";
+            this.txt_apiId.Size = new System.Drawing.Size(71, 20);
+            this.txt_apiId.TabIndex = 20;
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(109, 238);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(81, 20);
+            this.txt_name.TabIndex = 22;
+            // 
+            // txt_weight
+            // 
+            this.txt_weight.Location = new System.Drawing.Point(316, 238);
+            this.txt_weight.Name = "txt_weight";
+            this.txt_weight.Size = new System.Drawing.Size(71, 20);
+            this.txt_weight.TabIndex = 23;
+            // 
+            // txt_height
+            // 
+            this.txt_height.Location = new System.Drawing.Point(393, 238);
+            this.txt_height.Name = "txt_height";
+            this.txt_height.Size = new System.Drawing.Size(71, 20);
+            this.txt_height.TabIndex = 24;
+            // 
+            // txt_birthday
+            // 
+            this.txt_birthday.Location = new System.Drawing.Point(203, 238);
+            this.txt_birthday.Name = "txt_birthday";
+            this.txt_birthday.Size = new System.Drawing.Size(107, 20);
+            this.txt_birthday.TabIndex = 25;
+            // 
+            // txt_preferred_foot
+            // 
+            this.txt_preferred_foot.Location = new System.Drawing.Point(470, 238);
+            this.txt_preferred_foot.Name = "txt_preferred_foot";
+            this.txt_preferred_foot.Size = new System.Drawing.Size(98, 20);
+            this.txt_preferred_foot.TabIndex = 26;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label9.Location = new System.Drawing.Point(18, 220);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 15);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "API Id";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label10.Location = new System.Drawing.Point(106, 220);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 15);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label11.Location = new System.Drawing.Point(200, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 15);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "Birthday";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label12.Location = new System.Drawing.Point(313, 220);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 15);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Weight";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label13.Location = new System.Drawing.Point(390, 220);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 15);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Height";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label14.Location = new System.Drawing.Point(467, 220);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(85, 15);
+            this.label14.TabIndex = 32;
+            this.label14.Text = "Preferred Foot";
             // 
             // SQLUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.player_list);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txt_preferred_foot);
+            this.Controls.Add(this.txt_birthday);
+            this.Controls.Add(this.txt_height);
+            this.Controls.Add(this.txt_weight);
+            this.Controls.Add(this.txt_name);
+            this.Controls.Add(this.txt_apiId);
+            this.Controls.Add(this.playerList);
             this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btn_update);
@@ -269,8 +399,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "SQLUserControl";
-            this.Size = new System.Drawing.Size(596, 520);
-            ((System.ComponentModel.ISupportInitialize)(this.player_list)).EndInit();
+            this.Size = new System.Drawing.Size(596, 551);
+            ((System.ComponentModel.ISupportInitialize)(this.playerList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePLayerList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +427,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lbl_time;
-        private System.Windows.Forms.DataGridView player_list;
+        private System.Windows.Forms.DataGridView playerList;
+        private System.Windows.Forms.BindingSource bindingSourcePLayerList;
+        private System.Windows.Forms.TextBox txt_apiId;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.TextBox txt_weight;
+        private System.Windows.Forms.TextBox txt_height;
+        private System.Windows.Forms.TextBox txt_birthday;
+        private System.Windows.Forms.TextBox txt_preferred_foot;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label label14;
     }
 }

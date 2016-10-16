@@ -12,8 +12,6 @@ namespace CSDLNC.SQL
 
         public int Player_api_id { get; set; }
 
-        public int Player_fifa_api_id { get; set; }
-
         public string Player_name { get; set; }
 
         public string Birthday { get; set; }

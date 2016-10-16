@@ -1,0 +1,17 @@
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\CSDLNC.exe.config
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\CSDLNC.exe
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\CSDLNC.pdb
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.csprojResolveAssemblyReference.cache
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.Form1.resources
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.Properties.Resources.resources
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.SQLUserControl.resources
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.csproj.GenerateResource.Cache
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.exe
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.pdb
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\obj\Debug\CSDLNC.NoSQLUserControl.resources
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Bson.dll
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Driver.Core.dll
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Driver.dll
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Bson.xml
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Driver.xml
+\\Mac\Home\Documents\Visual Studio 2015\Projects\CSDLNC\CSDLNC\bin\Debug\MongoDB.Driver.Core.xml

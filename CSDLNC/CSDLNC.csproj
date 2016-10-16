@@ -80,6 +80,7 @@
       <DependentUpon>SQLUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="SQL\Player.cs" />
+    <Compile Include="SQL\NoSQLHelper.cs" />
     <Compile Include="SQL\SQLHelper.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

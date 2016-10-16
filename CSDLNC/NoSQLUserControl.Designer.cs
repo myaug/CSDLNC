@@ -1,6 +1,6 @@
 ﻿namespace CSDLNC
 {
-    partial class SQLUserControl
+    partial class NoSQLUserControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -57,9 +57,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label1.Location = new System.Drawing.Point(17, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 24);
+            this.label1.Size = new System.Drawing.Size(138, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "SQL Demo";
+            this.label1.Text = "NoSQL Demo";
             // 
             // label2
             // 
@@ -244,7 +244,7 @@
             this.player_list.Size = new System.Drawing.Size(535, 285);
             this.player_list.TabIndex = 18;
             // 
-            // SQLUserControl
+            // NoSQLUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -268,7 +268,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "SQLUserControl";
+            this.Name = "NoSQLUserControl";
             this.Size = new System.Drawing.Size(596, 520);
             ((System.ComponentModel.ISupportInitialize)(this.player_list)).EndInit();
             this.ResumeLayout(false);

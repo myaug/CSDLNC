@@ -11,8 +11,9 @@ namespace CSDLNC.SQL
     public class SQLHelper
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-        public string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        
+        //public string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = CSDLNC; Integrated Security = True";
+
         SqlConnection connection;
 
         public SQLHelper() {

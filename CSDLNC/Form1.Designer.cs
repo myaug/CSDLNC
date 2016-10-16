@@ -33,10 +33,10 @@
             // 
             // sqlUserControl1
             // 
-            this.sqlUserControl1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.sqlUserControl1.Location = new System.Drawing.Point(544, 5);
+            this.sqlUserControl1.AutoSize = true;
+            this.sqlUserControl1.Location = new System.Drawing.Point(527, 12);
             this.sqlUserControl1.Name = "sqlUserControl1";
-            this.sqlUserControl1.Size = new System.Drawing.Size(578, 518);
+            this.sqlUserControl1.Size = new System.Drawing.Size(595, 506);
             this.sqlUserControl1.TabIndex = 0;
             // 
             // Form1
@@ -48,6 +48,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

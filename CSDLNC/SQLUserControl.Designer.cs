@@ -54,13 +54,12 @@
             this.txt_weight = new System.Windows.Forms.TextBox();
             this.txt_height = new System.Windows.Forms.TextBox();
             this.txt_birthday = new System.Windows.Forms.TextBox();
-            this.txt_preferred_foot = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
+            this.btn_delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.playerList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePLayerList)).BeginInit();
             this.SuspendLayout();
@@ -212,11 +211,11 @@
             // 
             this.btn_add.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btn_add.Location = new System.Drawing.Point(124, 132);
+            this.btn_add.Location = new System.Drawing.Point(120, 132);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(146, 30);
+            this.btn_add.Size = new System.Drawing.Size(102, 30);
             this.btn_add.TabIndex = 14;
-            this.btn_add.Text = "Add New Player";
+            this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
@@ -224,12 +223,13 @@
             // 
             this.btn_update.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btn_update.Location = new System.Drawing.Point(290, 132);
+            this.btn_update.Location = new System.Drawing.Point(239, 132);
             this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(82, 30);
+            this.btn_update.Size = new System.Drawing.Size(98, 30);
             this.btn_update.TabIndex = 15;
             this.btn_update.Text = "Update";
             this.btn_update.UseVisualStyleBackColor = false;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // label8
             // 
@@ -295,13 +295,6 @@
             this.txt_birthday.Size = new System.Drawing.Size(107, 20);
             this.txt_birthday.TabIndex = 25;
             // 
-            // txt_preferred_foot
-            // 
-            this.txt_preferred_foot.Location = new System.Drawing.Point(470, 238);
-            this.txt_preferred_foot.Name = "txt_preferred_foot";
-            this.txt_preferred_foot.Size = new System.Drawing.Size(98, 20);
-            this.txt_preferred_foot.TabIndex = 26;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -352,28 +345,29 @@
             this.label13.TabIndex = 31;
             this.label13.Text = "Height";
             // 
-            // label14
+            // btn_delete
             // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label14.Location = new System.Drawing.Point(467, 220);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(85, 15);
-            this.label14.TabIndex = 32;
-            this.label14.Text = "Preferred Foot";
+            this.btn_delete.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btn_delete.Location = new System.Drawing.Point(352, 132);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(90, 30);
+            this.btn_delete.TabIndex = 33;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // SQLUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.label14);
+            this.Controls.Add(this.btn_delete);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.txt_preferred_foot);
             this.Controls.Add(this.txt_birthday);
             this.Controls.Add(this.txt_height);
             this.Controls.Add(this.txt_weight);
@@ -434,12 +428,11 @@
         private System.Windows.Forms.TextBox txt_weight;
         private System.Windows.Forms.TextBox txt_height;
         private System.Windows.Forms.TextBox txt_birthday;
-        private System.Windows.Forms.TextBox txt_preferred_foot;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Button btn_delete;
     }
 }

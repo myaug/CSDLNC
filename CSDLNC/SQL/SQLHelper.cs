@@ -37,22 +37,20 @@ namespace CSDLNC.SQL
         {
             try
             {
-                using (SqlConnection connection = OpenConnection())
-                {
-                    var cmd = new SqlCommand("INSERT INTO PLAYER VALUES(@player_api_id, @player_name, @player_fifa_api_id, @birthday, @height, @weight)", connection);
-                    cmd.Parameters.AddWithValue("@player_api_id", player.Player_api_id);
-                    cmd.Parameters.AddWithValue("@player_name", player.Player_name);
-                    cmd.Parameters.AddWithValue("@birthday", player.Birthday);
-                    cmd.Parameters.AddWithValue("@height", player.Height);
-                    cmd.Parameters.AddWithValue("@weight", player.Weight);
+                SqlConnection connection = OpenConnection();
+                var cmd = new SqlCommand("INSERT INTO PLAYER(player_api_id, player_name, birthday, height, weight) VALUES(@player_api_id, @player_name, @birthday, @height, @weight)", connection);
+                cmd.Parameters.AddWithValue("@player_api_id", player.Player_api_id);
+                cmd.Parameters.AddWithValue("@player_name", player.Player_name);
+                cmd.Parameters.AddWithValue("@birthday", player.Birthday);
+                cmd.Parameters.AddWithValue("@height", player.Height);
+                cmd.Parameters.AddWithValue("@weight", player.Weight);
 
-                    var sw = Stopwatch.StartNew();
+                var sw = Stopwatch.StartNew();
 
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                    sw.Stop();
-                    timeExecution = sw.ElapsedMilliseconds;
-                }
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
@@ -64,49 +62,47 @@ namespace CSDLNC.SQL
         {
             try
             {
-                using (SqlConnection connection = OpenConnection())
-                {
-                    var deleteMatchCmd = new SqlCommand("delete M from Match M"
-                                                        + "where M.away_player_1 = @playerId"
-                                                        + "OR M.away_player_2 = @playerId"
-                                                        + "OR M.away_player_3 = @playerId"
-                                                        + "OR M.away_player_4 = @playerId"
-                                                        + "OR M.away_player_5 = @playerId"
-                                                        + "OR M.away_player_6 = @playerId"
-                                                        + "OR M.away_player_7 = @playerId"
-                                                        + "OR M.away_player_8 = @playerId"
-                                                        + "OR M.away_player_9 = @playerId"
-                                                        + "OR M.away_player_10 = @playerId"
-                                                        + "OR M.away_player_11 = @playerId"
-                                                        + "OR M.home_player_1 = @playerId"
-                                                        + "OR M.home_player_2 = @playerId"
-                                                        + "OR M.home_player_3 = @playerId"
-                                                        + "OR M.home_player_4 = @playerId"
-                                                        + "OR M.home_player_5 = @playerId"
-                                                        + "OR M.home_player_6 = @playerId"
-                                                        + "OR M.home_player_7 = @playerId"
-                                                        + "OR M.home_player_8 = @playerId"
-                                                        + "OR M.home_player_9 = @playerId"
-                                                        + "OR M.home_player_10 = @playerId"
-                                                        + "OR M.home_player_11 = @playerId");
-                    deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
+                SqlConnection connection = OpenConnection();
+                var deleteMatchCmd = new SqlCommand("delete M from Match M"
+                                                    + "where M.away_player_1 = @playerId"
+                                                    + "OR M.away_player_2 = @playerId"
+                                                    + "OR M.away_player_3 = @playerId"
+                                                    + "OR M.away_player_4 = @playerId"
+                                                    + "OR M.away_player_5 = @playerId"
+                                                    + "OR M.away_player_6 = @playerId"
+                                                    + "OR M.away_player_7 = @playerId"
+                                                    + "OR M.away_player_8 = @playerId"
+                                                    + "OR M.away_player_9 = @playerId"
+                                                    + "OR M.away_player_10 = @playerId"
+                                                    + "OR M.away_player_11 = @playerId"
+                                                    + "OR M.home_player_1 = @playerId"
+                                                    + "OR M.home_player_2 = @playerId"
+                                                    + "OR M.home_player_3 = @playerId"
+                                                    + "OR M.home_player_4 = @playerId"
+                                                    + "OR M.home_player_5 = @playerId"
+                                                    + "OR M.home_player_6 = @playerId"
+                                                    + "OR M.home_player_7 = @playerId"
+                                                    + "OR M.home_player_8 = @playerId"
+                                                    + "OR M.home_player_9 = @playerId"
+                                                    + "OR M.home_player_10 = @playerId"
+                                                    + "OR M.home_player_11 = @playerId");
+                deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
-                    var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
-                                                                + "where PS.player_api_id = @player_api_id");
-                    deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
+                var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
+                                                            + "where PS.player_api_id = @player_api_id");
+                deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
 
-                    var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
-                    deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
+                var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
+                deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
 
-                    var sw = Stopwatch.StartNew();
+                var sw = Stopwatch.StartNew();
 
-                    deleteMatchCmd.ExecuteNonQuery();
-                    deletePlayerStatCmd.ExecuteNonQuery();
-                    deletePlayerCmd.ExecuteNonQuery();
+                deleteMatchCmd.ExecuteNonQuery();
+                deletePlayerStatCmd.ExecuteNonQuery();
+                deletePlayerCmd.ExecuteNonQuery();
 
-                    sw.Stop();
-                    return sw.ElapsedMilliseconds;
-                }
+                sw.Stop();
+                return sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
@@ -115,26 +111,27 @@ namespace CSDLNC.SQL
             return 0;
         }
 
-        public long Update(string playerName, string birthday, string preferredFoot)
+        public long Update(Player player)
         {
             try
             {
-                using (SqlConnection connection = OpenConnection())
-                {
-                    var cmd = new SqlCommand("UPDATE PS SET PS.preferred_foot = @preferred_foot from Player_Stats PS join Player P on P.player_api_id = PS.player_api_id where P.player_name like @player_name and P.birthday like @birthday", connection);
-                    cmd.Parameters.AddWithValue("@preferred_foot", preferredFoot);
-                    cmd.Parameters.AddWithValue("@player_name", playerName);
-                    cmd.Parameters.AddWithValue("@birthday", birthday);
+                SqlConnection connection = OpenConnection();
+                var cmd = new SqlCommand("update Player " 
+                                            + "set player_name = @player_name, birthday = @birthday, weight = @weight, height = @height "
+                                            + "where player_api_id = @player_api_id", connection);
+                cmd.Parameters.AddWithValue("@player_name", player.Player_name);
+                cmd.Parameters.AddWithValue("@birthday", player.Birthday);
+                cmd.Parameters.AddWithValue("@weight", player.Weight);
+                cmd.Parameters.AddWithValue("@height", player.Height);
+                cmd.Parameters.AddWithValue("@player_api_id", player.Player_api_id);
 
-                    var sw = Stopwatch.StartNew();
+                var sw = Stopwatch.StartNew();
 
-                    cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
 
-                    sw.Stop();
-                    return sw.ElapsedMilliseconds;
-                }
-
-            }
+                sw.Stop();
+                return sw.ElapsedMilliseconds;
+        }
             catch (Exception ex)
             {
                 CloseConnection();

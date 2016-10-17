@@ -38,8 +38,14 @@ namespace CSDLNC
 
         private void btn_Select_Click(object sender, EventArgs e)
         {
+            btn_Select.Text = "Selecting...";
+            btn_Select.Refresh();
+
             bindingSourcePLayerList.DataSource = helper.Select();
+
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
+            btn_Select.Text = "Select";
+            btn_Select.Refresh();
         }
         
         private void BindPlayerList()
@@ -50,16 +56,54 @@ namespace CSDLNC
         private void InitInsertData()
         {
             txt_apiId.Text = "80000";
-            txt_name.Text = "Ronaldo";
+            txt_name.Text = "Minh Hoang";
             txt_birthday.Text = "1990-02-29 00:00:00";
             txt_height.Text = "182880000";
             txt_weight.Text = "187";
-            txt_preferred_foot.Text = "right";
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            Player player = new Player()
+            btn_add.Text = "Adding...";
+            btn_add.Refresh();
+
+            
+            helper.Insert(InitPlayer());
+
+            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
+            btn_add.Text = "Add";
+            btn_add.Refresh();
+        }
+
+        private void btn_update_Click(object sender, EventArgs e)
+        {
+            btn_update.Text = "Updating...";
+            btn_update.Refresh();
+
+
+            helper.Update(InitPlayer());
+
+            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
+            btn_update.Text = "Update";
+            btn_update.Refresh();
+        }
+
+        private void btn_delete_Click(object sender, EventArgs e)
+        {
+            btn_delete.Text = "Deleting...";
+            btn_delete.Refresh();
+
+
+            helper.Update(InitPlayer());
+
+            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
+            btn_delete.Text = "Delete";
+            btn_delete.Refresh();
+        }
+
+        private Player InitPlayer()
+        {
+            return new Player()
             {
                 Player_api_id = int.Parse(txt_apiId.Text),
                 Player_name = txt_name.Text,
@@ -67,8 +111,7 @@ namespace CSDLNC
                 Height = int.Parse(txt_height.Text),
                 Weight = int.Parse(txt_weight.Text)
             };
-            helper.Insert(player);
-            lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
         }
+
     }
 }

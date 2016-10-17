@@ -36,14 +36,14 @@
             this.sqlUserControl1.AutoSize = true;
             this.sqlUserControl1.Location = new System.Drawing.Point(527, 12);
             this.sqlUserControl1.Name = "sqlUserControl1";
-            this.sqlUserControl1.Size = new System.Drawing.Size(595, 506);
+            this.sqlUserControl1.Size = new System.Drawing.Size(595, 548);
             this.sqlUserControl1.TabIndex = 0;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1123, 525);
+            this.ClientSize = new System.Drawing.Size(1123, 566);
             this.Controls.Add(this.sqlUserControl1);
             this.Name = "Form1";
             this.Text = "Form1";

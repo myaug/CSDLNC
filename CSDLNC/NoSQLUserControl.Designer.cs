@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -46,8 +47,21 @@
             this.btn_update = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.lbl_time = new System.Windows.Forms.Label();
-            this.player_list = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.player_list)).BeginInit();
+            this.playerList = new System.Windows.Forms.DataGridView();
+            this.bindingSourcePLayerList = new System.Windows.Forms.BindingSource(this.components);
+            this.txt_apiId = new System.Windows.Forms.TextBox();
+            this.txt_name = new System.Windows.Forms.TextBox();
+            this.txt_weight = new System.Windows.Forms.TextBox();
+            this.txt_height = new System.Windows.Forms.TextBox();
+            this.txt_birthday = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btn_delete = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.playerList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePLayerList)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,9 +71,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label1.Location = new System.Drawing.Point(17, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 24);
+            this.label1.Size = new System.Drawing.Size(247, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "NoSQL Demo";
+            this.label1.Text = "NoSQL Demo (mongodb)";
             // 
             // label2
             // 
@@ -120,6 +134,7 @@
             this.label7.Size = new System.Drawing.Size(100, 16);
             this.label7.TabIndex = 6;
             this.label7.Text = "Player_Stats:";
+            this.label7.Visible = false;
             // 
             // country_lbl
             // 
@@ -180,6 +195,7 @@
             this.player_stats_lbl.Size = new System.Drawing.Size(92, 16);
             this.player_stats_lbl.TabIndex = 12;
             this.player_stats_lbl.Text = "12000 records";
+            this.player_stats_lbl.Visible = false;
             // 
             // btn_Select
             // 
@@ -197,23 +213,25 @@
             // 
             this.btn_add.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btn_add.Location = new System.Drawing.Point(124, 132);
+            this.btn_add.Location = new System.Drawing.Point(120, 132);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(146, 30);
+            this.btn_add.Size = new System.Drawing.Size(102, 30);
             this.btn_add.TabIndex = 14;
-            this.btn_add.Text = "Add New Player";
+            this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // btn_update
             // 
             this.btn_update.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btn_update.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.btn_update.Location = new System.Drawing.Point(290, 132);
+            this.btn_update.Location = new System.Drawing.Point(239, 132);
             this.btn_update.Name = "btn_update";
-            this.btn_update.Size = new System.Drawing.Size(82, 30);
+            this.btn_update.Size = new System.Drawing.Size(98, 30);
             this.btn_update.TabIndex = 15;
             this.btn_update.Text = "Update";
             this.btn_update.UseVisualStyleBackColor = false;
+            this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // label8
             // 
@@ -236,20 +254,128 @@
             this.lbl_time.TabIndex = 17;
             this.lbl_time.Text = "12ms";
             // 
-            // player_list
+            // playerList
             // 
-            this.player_list.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.player_list.Location = new System.Drawing.Point(21, 216);
-            this.player_list.Name = "player_list";
-            this.player_list.Size = new System.Drawing.Size(535, 285);
-            this.player_list.TabIndex = 18;
+            this.playerList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.playerList.Location = new System.Drawing.Point(21, 271);
+            this.playerList.Name = "playerList";
+            this.playerList.Size = new System.Drawing.Size(547, 274);
+            this.playerList.TabIndex = 18;
+            // 
+            // txt_apiId
+            // 
+            this.txt_apiId.Location = new System.Drawing.Point(20, 238);
+            this.txt_apiId.Name = "txt_apiId";
+            this.txt_apiId.Size = new System.Drawing.Size(71, 20);
+            this.txt_apiId.TabIndex = 20;
+            // 
+            // txt_name
+            // 
+            this.txt_name.Location = new System.Drawing.Point(109, 238);
+            this.txt_name.Name = "txt_name";
+            this.txt_name.Size = new System.Drawing.Size(81, 20);
+            this.txt_name.TabIndex = 22;
+            // 
+            // txt_weight
+            // 
+            this.txt_weight.Location = new System.Drawing.Point(316, 238);
+            this.txt_weight.Name = "txt_weight";
+            this.txt_weight.Size = new System.Drawing.Size(71, 20);
+            this.txt_weight.TabIndex = 23;
+            // 
+            // txt_height
+            // 
+            this.txt_height.Location = new System.Drawing.Point(393, 238);
+            this.txt_height.Name = "txt_height";
+            this.txt_height.Size = new System.Drawing.Size(71, 20);
+            this.txt_height.TabIndex = 24;
+            // 
+            // txt_birthday
+            // 
+            this.txt_birthday.Location = new System.Drawing.Point(203, 238);
+            this.txt_birthday.Name = "txt_birthday";
+            this.txt_birthday.Size = new System.Drawing.Size(107, 20);
+            this.txt_birthday.TabIndex = 25;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label9.Location = new System.Drawing.Point(18, 220);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(38, 15);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "API Id";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label10.Location = new System.Drawing.Point(106, 220);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(41, 15);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "Name";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label11.Location = new System.Drawing.Point(200, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 15);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "Birthday";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label12.Location = new System.Drawing.Point(313, 220);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(45, 15);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "Weight";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.label13.Location = new System.Drawing.Point(390, 220);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(43, 15);
+            this.label13.TabIndex = 31;
+            this.label13.Text = "Height";
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btn_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.btn_delete.Location = new System.Drawing.Point(352, 132);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(90, 30);
+            this.btn_delete.TabIndex = 33;
+            this.btn_delete.Text = "Delete";
+            this.btn_delete.UseVisualStyleBackColor = false;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
             // 
             // NoSQLUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.Controls.Add(this.player_list);
+            this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.txt_birthday);
+            this.Controls.Add(this.txt_height);
+            this.Controls.Add(this.txt_weight);
+            this.Controls.Add(this.txt_name);
+            this.Controls.Add(this.txt_apiId);
+            this.Controls.Add(this.playerList);
             this.Controls.Add(this.lbl_time);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btn_update);
@@ -269,8 +395,9 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "NoSQLUserControl";
-            this.Size = new System.Drawing.Size(596, 520);
-            ((System.ComponentModel.ISupportInitialize)(this.player_list)).EndInit();
+            this.Size = new System.Drawing.Size(596, 551);
+            ((System.ComponentModel.ISupportInitialize)(this.playerList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourcePLayerList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,6 +423,18 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label lbl_time;
-        private System.Windows.Forms.DataGridView player_list;
+        private System.Windows.Forms.DataGridView playerList;
+        private System.Windows.Forms.BindingSource bindingSourcePLayerList;
+        private System.Windows.Forms.TextBox txt_apiId;
+        private System.Windows.Forms.TextBox txt_name;
+        private System.Windows.Forms.TextBox txt_weight;
+        private System.Windows.Forms.TextBox txt_height;
+        private System.Windows.Forms.TextBox txt_birthday;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btn_delete;
     }
 }

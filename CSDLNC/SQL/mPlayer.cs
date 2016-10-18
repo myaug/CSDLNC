@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CSDLNC.SQL
 {
-    public class Player
+    public class mPlayer
     {
-        public Object Id { get; set; }
+        public Object _id { get; set; }
 
-        public int Player_api_id { get; set; }
+        public int Player_id { get; set; }
 
         public string Player_name { get; set; }
 

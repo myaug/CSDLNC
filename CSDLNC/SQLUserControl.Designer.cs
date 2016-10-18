@@ -71,9 +71,9 @@
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
             this.label1.Location = new System.Drawing.Point(17, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 24);
+            this.label1.Size = new System.Drawing.Size(238, 24);
             this.label1.TabIndex = 0;
-            this.label1.Text = "SQL Demo";
+            this.label1.Text = "SQL Demo (SQL Server)";
             // 
             // label2
             // 

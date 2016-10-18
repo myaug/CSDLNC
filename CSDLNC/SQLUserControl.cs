@@ -38,7 +38,7 @@ namespace CSDLNC
 
         private void btn_Select_Click(object sender, EventArgs e)
         {
-            btn_Select.Text = "Selecting...";
+            btn_Select.Text = "Selecting";
             btn_Select.Refresh();
 
             bindingSourcePLayerList.DataSource = helper.Select();
@@ -64,7 +64,7 @@ namespace CSDLNC
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            btn_add.Text = "Adding...";
+            btn_add.Text = "Adding";
             btn_add.Refresh();
 
             
@@ -77,7 +77,7 @@ namespace CSDLNC
 
         private void btn_update_Click(object sender, EventArgs e)
         {
-            btn_update.Text = "Updating...";
+            btn_update.Text = "Updating";
             btn_update.Refresh();
 
 
@@ -90,7 +90,7 @@ namespace CSDLNC
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            btn_delete.Text = "Deleting...";
+            btn_delete.Text = "Deleting";
             btn_delete.Refresh();
 
 

@@ -8,8 +8,8 @@ namespace CSDLNC.SQL
     public class SQLHelper
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-        private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        //public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = CSDLNC; Integrated Security = True";
+        //private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = Soccer; Integrated Security = True";
 
         private SqlConnection connection;
         public long timeExecution = 0;
@@ -146,11 +146,12 @@ namespace CSDLNC.SQL
             try
             {
                 SqlConnection connection = OpenConnection();
-                string selectCmd = "select P.*, T.overal_rating from Player P"
+                string selectCmd = "select P.id, P.player_api_id, P.player_name, P.birthday, T.overal_rating, P.height, P.weight from Player P"
                                             + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
                                             + " from Player_Stats s"
                                             + " group by s.player_api_id"
-                                            + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id";
+                                            + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id"
+                                            + " order by T.overal_rating desc";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(selectCmd, connection);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
                 DataTable table = new DataTable();

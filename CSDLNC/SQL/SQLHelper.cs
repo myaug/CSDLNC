@@ -8,8 +8,8 @@ namespace CSDLNC.SQL
     public class SQLHelper
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-        //private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        public string connectionString = "Data Source =.; Initial Catalog = CSDLNC; Integrated Security = True";
+        private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        //public string connectionString = "Data Source =.; Initial Catalog = CSDLNC; Integrated Security = True";
 
         private SqlConnection connection;
         public long timeExecution = 0;
@@ -63,33 +63,33 @@ namespace CSDLNC.SQL
             try
             {
                 SqlConnection connection = OpenConnection();
-                var deleteMatchCmd = new SqlCommand("delete M from Match M"
-                                                    + "where M.away_player_1 = @playerId"
-                                                    + "OR M.away_player_2 = @playerId"
-                                                    + "OR M.away_player_3 = @playerId"
-                                                    + "OR M.away_player_4 = @playerId"
-                                                    + "OR M.away_player_5 = @playerId"
-                                                    + "OR M.away_player_6 = @playerId"
-                                                    + "OR M.away_player_7 = @playerId"
-                                                    + "OR M.away_player_8 = @playerId"
-                                                    + "OR M.away_player_9 = @playerId"
-                                                    + "OR M.away_player_10 = @playerId"
-                                                    + "OR M.away_player_11 = @playerId"
-                                                    + "OR M.home_player_1 = @playerId"
-                                                    + "OR M.home_player_2 = @playerId"
-                                                    + "OR M.home_player_3 = @playerId"
-                                                    + "OR M.home_player_4 = @playerId"
-                                                    + "OR M.home_player_5 = @playerId"
-                                                    + "OR M.home_player_6 = @playerId"
-                                                    + "OR M.home_player_7 = @playerId"
-                                                    + "OR M.home_player_8 = @playerId"
-                                                    + "OR M.home_player_9 = @playerId"
-                                                    + "OR M.home_player_10 = @playerId"
-                                                    + "OR M.home_player_11 = @playerId", connection);
+                var deleteMatchCmd = new SqlCommand("delete from Match"
+                                                    + " where away_player_1 = @playerId"
+                                                    + " OR away_player_2 = @playerId"
+                                                    + " OR away_player_3 = @playerId"
+                                                    + " OR away_player_4 = @playerId"
+                                                    + " OR away_player_5 = @playerId"
+                                                    + " OR away_player_6 = @playerId"
+                                                    + " OR away_player_7 = @playerId"
+                                                    + " OR away_player_8 = @playerId"
+                                                    + " OR away_player_9 = @playerId"
+                                                    + " OR away_player_10 = @playerId"
+                                                    + " OR away_player_11 = @playerId"
+                                                    + " OR home_player_1 = @playerId"
+                                                    + " OR home_player_2 = @playerId"
+                                                    + " OR home_player_3 = @playerId"
+                                                    + " OR home_player_4 = @playerId"
+                                                    + " OR home_player_5 = @playerId"
+                                                    + " OR home_player_6 = @playerId"
+                                                    + " OR home_player_7 = @playerId"
+                                                    + " OR home_player_8 = @playerId"
+                                                    + " OR home_player_9 = @playerId"
+                                                    + " OR home_player_10 = @playerId"
+                                                    + " OR home_player_11 = @playerId", connection);
                 deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
-                var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
-                                                            + "where PS.player_api_id = @player_api_id", connection);
+                var deletePlayerStatCmd = new SqlCommand("delete from Player_Stats" 
+                                                            + " where player_api_id = @player_api_id", connection);
                 deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
 
                 var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId", connection);

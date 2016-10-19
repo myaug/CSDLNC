@@ -98,6 +98,7 @@ namespace CSDLNC
             var player_api_id = int.Parse(selectedRow.Cells["player_api_id"].Value.ToString());
 
             helper.Delete(playerId, player_api_id);
+            bindingSourcePLayerList.DataSource = helper.Select();
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_delete.Text = "Delete";

@@ -81,7 +81,7 @@ namespace CSDLNC
             btn_update.Refresh();
 
 
-            //helper.Update(InitPlayer());
+            helper.Update(InitPlayer());
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_update.Text = "Update";
@@ -94,18 +94,18 @@ namespace CSDLNC
             btn_delete.Refresh();
 
 
-            //helper.Update(InitPlayer());
+            helper.Delete(int.Parse(txt_apiId.Text));
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_delete.Text = "Delete";
             btn_delete.Refresh();
         }
 
-        private Player InitPlayer()
+        private mPlayer InitPlayer()
         {
-            return new Player()
+            return new mPlayer()
             {
-                Player_api_id = int.Parse(txt_apiId.Text),
+                Player_id = int.Parse(txt_apiId.Text),
                 Player_name = txt_name.Text,
                 Birthday = txt_birthday.Text,
                 Height = int.Parse(txt_height.Text),

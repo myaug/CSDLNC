@@ -278,14 +278,14 @@
             // 
             // txt_weight
             // 
-            this.txt_weight.Location = new System.Drawing.Point(316, 238);
+            this.txt_weight.Location = new System.Drawing.Point(393, 238);
             this.txt_weight.Name = "txt_weight";
             this.txt_weight.Size = new System.Drawing.Size(71, 20);
             this.txt_weight.TabIndex = 23;
             // 
             // txt_height
             // 
-            this.txt_height.Location = new System.Drawing.Point(393, 238);
+            this.txt_height.Location = new System.Drawing.Point(316, 238);
             this.txt_height.Name = "txt_height";
             this.txt_height.Size = new System.Drawing.Size(71, 20);
             this.txt_height.TabIndex = 24;
@@ -331,7 +331,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label12.Location = new System.Drawing.Point(313, 220);
+            this.label12.Location = new System.Drawing.Point(390, 220);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 15);
             this.label12.TabIndex = 30;
@@ -341,7 +341,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label13.Location = new System.Drawing.Point(390, 220);
+            this.label13.Location = new System.Drawing.Point(313, 220);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(43, 15);
             this.label13.TabIndex = 31;

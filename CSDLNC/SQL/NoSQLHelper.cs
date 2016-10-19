@@ -24,114 +24,57 @@ namespace CSDLNC.SQL
             _database = _client.GetDatabase("soccer");
         }
 
-        public long Insert(Player player)
+        public void Insert(mPlayer player)
         {
             try
             {
-                //using (SqlConnection connection = OpenConnection())
-                //{
-                //    var cmd = new SqlCommand("INSERT INTO PLAYER VALUES(@player_api_id, @player_name, @player_fifa_api_id, @birthday, @height, @weight)", connection);
-                //    cmd.Parameters.AddWithValue("@player_api_id", player.Player_api_id);
-                //    cmd.Parameters.AddWithValue("@player_name", player.Player_name);
-                //    cmd.Parameters.AddWithValue("@player_fifa_api_id", player.Player_fifa_api_id);
-                //    cmd.Parameters.AddWithValue("@birthday", player.Birthday);
-                //    cmd.Parameters.AddWithValue("@height", player.Height);
-                //    cmd.Parameters.AddWithValue("@weight", player.Weight);
-
-                //    var sw = Stopwatch.StartNew();
-
-                //    cmd.ExecuteNonQuery();
-
-                //    sw.Stop();
-                //    return sw.ElapsedMilliseconds;
-                //}
+                var collection = _database.GetCollection<BsonDocument>("Player");
+                var sw = Stopwatch.StartNew();
+                collection.InsertOne(new BsonDocument { { "player_id", player.Player_id }, { "player_name", player.Player_name },
+                    { "birthday", player.Birthday }, { "height", player.Height }, { "weight", player.Weight } });
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
             }
-
-            return 0;
         }
 
-        public long Delete(int player_id, int player_fifa_api_id, int player_api_id)
+        public void Delete(int player_id)
         {
             try
             {
-                //using (SqlConnection connection = OpenConnection())
-                //{
-                //    var deleteMatchCmd = new SqlCommand("delete M from Match M"
-                //                                        + "where M.away_player_1 = @playerId"
-                //                                        + "OR M.away_player_2 = @playerId"
-                //                                        + "OR M.away_player_3 = @playerId"
-                //                                        + "OR M.away_player_4 = @playerId"
-                //                                        + "OR M.away_player_5 = @playerId"
-                //                                        + "OR M.away_player_6 = @playerId"
-                //                                        + "OR M.away_player_7 = @playerId"
-                //                                        + "OR M.away_player_8 = @playerId"
-                //                                        + "OR M.away_player_9 = @playerId"
-                //                                        + "OR M.away_player_10 = @playerId"
-                //                                        + "OR M.away_player_11 = @playerId"
-                //                                        + "OR M.home_player_1 = @playerId"
-                //                                        + "OR M.home_player_2 = @playerId"
-                //                                        + "OR M.home_player_3 = @playerId"
-                //                                        + "OR M.home_player_4 = @playerId"
-                //                                        + "OR M.home_player_5 = @playerId"
-                //                                        + "OR M.home_player_6 = @playerId"
-                //                                        + "OR M.home_player_7 = @playerId"
-                //                                        + "OR M.home_player_8 = @playerId"
-                //                                        + "OR M.home_player_9 = @playerId"
-                //                                        + "OR M.home_player_10 = @playerId"
-                //                                        + "OR M.home_player_11 = @playerId");
-                //    deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
-
-                //    var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
-                //                                                + "where PS.player_api_id = @player_api_id"
-                //                                                + "and PS.player_fifa_api_id = @player_fifa_api_id");
-                //    deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
-                //    deletePlayerStatCmd.Parameters.AddWithValue("@player_fifa_api_id", player_fifa_api_id);
-
-                //    var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
-                //    deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
-
-                //    var sw = Stopwatch.StartNew();
-
-                //    deleteMatchCmd.ExecuteNonQuery();
-                //    deletePlayerStatCmd.ExecuteNonQuery();
-                //    deletePlayerCmd.ExecuteNonQuery();
-
-                //    sw.Stop();
-                //    return sw.ElapsedMilliseconds;
-                //}
+                var collection = _database.GetCollection<BsonDocument>("Player");
+                var filter = Builders<BsonDocument>.Filter.Eq("player_id", player_id);
+                var sw = Stopwatch.StartNew();
+                collection.DeleteMany(filter);
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
             }
-            return 0;
         }
 
-        public long Update(string playerName, string birthday, string preferredFoot)
+        public void Update(mPlayer player)
         {
             try
             {
-                //using (SqlConnection connection = OpenConnection())
-                //{
-                //    var cmd = new SqlCommand("UPDATE PS SET PS.preferred_foot = @preferred_foot from Player_Stats PS join Player P on P.player_api_id = PS.player_api_id where P.player_name like @player_name and P.birthday like @birthday", connection);
-                //    cmd.Parameters.AddWithValue("@preferred_foot", preferredFoot);
-                //    cmd.Parameters.AddWithValue("@player_name", playerName);
-                //    cmd.Parameters.AddWithValue("@birthday", birthday);
-
-                //    var sw = Stopwatch.StartNew();
-
-                //    cmd.ExecuteNonQuery();
-
-                //    sw.Stop();
-                //    return sw.ElapsedMilliseconds;
-                //}
+                var collection = _database.GetCollection<BsonDocument>("Player");
+                var filter = Builders<BsonDocument>.Filter.Eq("player_id", player.Player_id);
+                var update = Builders<BsonDocument>.Update.Set("player_name", player.Player_name).
+                    Set("birthday", player.Birthday).Set("height", player.Height).Set("weight", player.Weight);
+                var sw = Stopwatch.StartNew();
+                collection.UpdateOne(filter, update);
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
             }
-            return 0;
         }
 
         public List<mPlayer> Select()
@@ -140,8 +83,8 @@ namespace CSDLNC.SQL
 
             try
             {
-                var sw = Stopwatch.StartNew();
                 var collection = _database.GetCollection<BsonDocument>("Player");
+                var sw = Stopwatch.StartNew();
                 var response = collection.Aggregate()
                     .Unwind(x => x["Player_Stats"])
                     .Group(new BsonDocument { { "_id", "$_id" }, { "Player_id", new BsonDocument("$first", "$player_id") },
@@ -160,6 +103,7 @@ namespace CSDLNC.SQL
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
             }
 
             return players;
@@ -171,9 +115,9 @@ namespace CSDLNC.SQL
 
             try
             {
-                var sw = Stopwatch.StartNew();
                 var collection = _database.GetCollection<BsonDocument>("Player");
                 var filter = Builders<BsonDocument>.Filter.Eq("player_id", player_id);
+                var sw = Stopwatch.StartNew();
                 var response = collection.Find(filter).ToList();
                 sw.Stop();
                 timeExecution = sw.ElapsedMilliseconds;
@@ -187,6 +131,7 @@ namespace CSDLNC.SQL
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
             }
 
             return players;

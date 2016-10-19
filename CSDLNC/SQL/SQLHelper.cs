@@ -8,8 +8,8 @@ namespace CSDLNC.SQL
     public class SQLHelper
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
-        private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        //public string connectionString = "Data Source =.; Initial Catalog = CSDLNC; Integrated Security = True";
+        //private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
+        private string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = Soccer; Integrated Security = True";
 
         private SqlConnection connection;
         public long timeExecution = 0;
@@ -54,6 +54,7 @@ namespace CSDLNC.SQL
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
                 CloseConnection();
             }
         }
@@ -63,42 +64,42 @@ namespace CSDLNC.SQL
             try
             {
                 SqlConnection connection = OpenConnection();
-                var deleteMatchCmd = new SqlCommand("delete from Match"
-                                                    + " where away_player_1 = @playerId"
-                                                    + " OR away_player_2 = @playerId"
-                                                    + " OR away_player_3 = @playerId"
-                                                    + " OR away_player_4 = @playerId"
-                                                    + " OR away_player_5 = @playerId"
-                                                    + " OR away_player_6 = @playerId"
-                                                    + " OR away_player_7 = @playerId"
-                                                    + " OR away_player_8 = @playerId"
-                                                    + " OR away_player_9 = @playerId"
-                                                    + " OR away_player_10 = @playerId"
-                                                    + " OR away_player_11 = @playerId"
-                                                    + " OR home_player_1 = @playerId"
-                                                    + " OR home_player_2 = @playerId"
-                                                    + " OR home_player_3 = @playerId"
-                                                    + " OR home_player_4 = @playerId"
-                                                    + " OR home_player_5 = @playerId"
-                                                    + " OR home_player_6 = @playerId"
-                                                    + " OR home_player_7 = @playerId"
-                                                    + " OR home_player_8 = @playerId"
-                                                    + " OR home_player_9 = @playerId"
-                                                    + " OR home_player_10 = @playerId"
-                                                    + " OR home_player_11 = @playerId", connection);
-                deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
+                //var deleteMatchCmd = new SqlCommand("delete from Match"
+                //                                    + " where away_player_1 = @playerId"
+                //                                    + " OR away_player_2 = @playerId"
+                //                                    + " OR away_player_3 = @playerId"
+                //                                    + " OR away_player_4 = @playerId"
+                //                                    + " OR away_player_5 = @playerId"
+                //                                    + " OR away_player_6 = @playerId"
+                //                                    + " OR away_player_7 = @playerId"
+                //                                    + " OR away_player_8 = @playerId"
+                //                                    + " OR away_player_9 = @playerId"
+                //                                    + " OR away_player_10 = @playerId"
+                //                                    + " OR away_player_11 = @playerId"
+                //                                    + " OR home_player_1 = @playerId"
+                //                                    + " OR home_player_2 = @playerId"
+                //                                    + " OR home_player_3 = @playerId"
+                //                                    + " OR home_player_4 = @playerId"
+                //                                    + " OR home_player_5 = @playerId"
+                //                                    + " OR home_player_6 = @playerId"
+                //                                    + " OR home_player_7 = @playerId"
+                //                                    + " OR home_player_8 = @playerId"
+                //                                    + " OR home_player_9 = @playerId"
+                //                                    + " OR home_player_10 = @playerId"
+                //                                    + " OR home_player_11 = @playerId", connection);
+                //deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
-                var deletePlayerStatCmd = new SqlCommand("delete from Player_Stats" 
-                                                            + " where player_api_id = @player_api_id", connection);
-                deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
+                //var deletePlayerStatCmd = new SqlCommand("delete from Player_Stats" 
+                //                                            + " where player_api_id = @player_api_id", connection);
+                //deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
 
-                var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId", connection);
-                deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
+                var deletePlayerCmd = new SqlCommand("delete from Player where player_api_id = @player_api_id", connection);
+                deletePlayerCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
 
                 var sw = Stopwatch.StartNew();
 
-                deleteMatchCmd.ExecuteNonQuery();
-                deletePlayerStatCmd.ExecuteNonQuery();
+                //deleteMatchCmd.ExecuteNonQuery();
+                //deletePlayerStatCmd.ExecuteNonQuery();
                 deletePlayerCmd.ExecuteNonQuery();
 
                 sw.Stop();
@@ -106,6 +107,7 @@ namespace CSDLNC.SQL
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
                 CloseConnection();
             }
         }
@@ -133,18 +135,17 @@ namespace CSDLNC.SQL
         }
             catch (Exception ex)
             {
+                timeExecution = -1;
                 CloseConnection();
             }
         }
 
         public DataTable Select()
         {
-            //var players = new List<Player>();
-
             try
             {
                 SqlConnection connection = OpenConnection();
-                string selectCmd = "select P.id, P.player_api_id, P.player_name, P.birthday, T.overal_rating, P.height, P.weight from Player P"
+                string selectCmd = "select P.id, P.player_api_id, P.player_name, P.birthday, P.height, P.weight, T.overal_rating from Player P"
                                             + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
                                             + " from Player_Stats s"
                                             + " group by s.player_api_id"
@@ -163,44 +164,42 @@ namespace CSDLNC.SQL
                 timeExecution = sw.ElapsedMilliseconds;
 
                 return table;
-
-                    //var cmd = new SqlCommand("select P.*, T.overal_rating from Player P"
-                    //                           + " join (select top 1000 s.player_api_id, MAX(s.overall_rating) AS [overal_rating]"
-                    //                           + " from Player_Stats s"
-                    //                           + " group by s.player_api_id"
-                    //                           + " order by MAX(s.overall_rating) desc) T on T.player_api_id = P.player_api_id", connection);
-
-                    //using (SqlDataReader reader = cmd.ExecuteReader())
-                    //{
-                    //    int count = 0;
-                    //    int player_api_id, height, weight, overal_rating;
-                    //    string player_name, birthday;
-                    //    while (reader.Read())
-                    //    {
-                    //        if (count == 1000) return players;
-
-                    //        player_api_id = int.Parse(reader["player_api_id"].ToString());
-                    //        player_name = reader["player_name"].ToString();
-                    //        birthday = reader["birthday"].ToString();
-                    //        height = int.Parse(reader["height"].ToString());
-                    //        weight = int.Parse(reader["weight"].ToString());
-                    //        overal_rating = int.Parse(reader["overal_rating"].ToString());
-
-                    //        players.Add(new Player()
-                    //        {
-                    //            Player_api_id = player_api_id,
-                    //            Player_name = player_name,
-                    //            Birthday = birthday,
-                    //            Height = height,
-                    //            Weight = weight
-                    //        });
-
-                    //        count++;
-                    //    }
-                    //}
             }
             catch (Exception ex)
             {
+                timeExecution = -1;
+                CloseConnection();
+            }
+
+            return null;
+        }
+
+        public DataTable Select(int player_api_id)
+        {
+            try
+            {
+                SqlConnection connection = OpenConnection();
+                string selectCmd = "select P.id, P.player_api_id, P.player_name, P.birthday, P.height, P.weight from Player P"
+                                            + " where P.player_api_id = @player_api_id";
+                var cmd = new SqlCommand(selectCmd, connection);
+                cmd.Parameters.AddWithValue("@player_api_id", player_api_id);
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                DataTable table = new DataTable();
+                table.Locale = System.Globalization.CultureInfo.InvariantCulture;
+
+                var sw = Stopwatch.StartNew();
+
+                dataAdapter.Fill(table);
+
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
+
+                return table;
+            }
+            catch (Exception ex)
+            {
+                timeExecution = -1;
                 CloseConnection();
             }
 

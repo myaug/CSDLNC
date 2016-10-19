@@ -16,10 +16,10 @@ namespace CSDLNC.SQL
 
         public string Birthday { get; set; }
 
-        public int? Overall_rating { get; set; }
-
         public int Height { get; set; }
 
         public int Weight { get; set; }
+
+        public int? Overall_rating { get; set; }
     }
 }

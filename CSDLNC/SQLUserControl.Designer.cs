@@ -202,7 +202,7 @@
             this.btn_Select.Location = new System.Drawing.Point(21, 132);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(82, 30);
-            this.btn_Select.TabIndex = 13;
+            this.btn_Select.TabIndex = 0;
             this.btn_Select.Text = "Select";
             this.btn_Select.UseVisualStyleBackColor = false;
             this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
@@ -214,7 +214,7 @@
             this.btn_add.Location = new System.Drawing.Point(120, 132);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(102, 30);
-            this.btn_add.TabIndex = 14;
+            this.btn_add.TabIndex = 1;
             this.btn_add.Text = "Add";
             this.btn_add.UseVisualStyleBackColor = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
@@ -226,7 +226,7 @@
             this.btn_update.Location = new System.Drawing.Point(239, 132);
             this.btn_update.Name = "btn_update";
             this.btn_update.Size = new System.Drawing.Size(98, 30);
-            this.btn_update.TabIndex = 15;
+            this.btn_update.TabIndex = 2;
             this.btn_update.Text = "Update";
             this.btn_update.UseVisualStyleBackColor = false;
             this.btn_update.Click += new System.EventHandler(this.btn_update_Click);
@@ -250,7 +250,7 @@
             this.lbl_time.Name = "lbl_time";
             this.lbl_time.Size = new System.Drawing.Size(40, 16);
             this.lbl_time.TabIndex = 17;
-            this.lbl_time.Text = "12ms";
+            this.lbl_time.Text = "-1 ms";
             // 
             // playerList
             // 
@@ -258,42 +258,42 @@
             this.playerList.Location = new System.Drawing.Point(21, 271);
             this.playerList.Name = "playerList";
             this.playerList.Size = new System.Drawing.Size(547, 274);
-            this.playerList.TabIndex = 18;
+            this.playerList.TabIndex = 9;
             // 
             // txt_apiId
             // 
             this.txt_apiId.Location = new System.Drawing.Point(20, 238);
             this.txt_apiId.Name = "txt_apiId";
             this.txt_apiId.Size = new System.Drawing.Size(71, 20);
-            this.txt_apiId.TabIndex = 20;
+            this.txt_apiId.TabIndex = 4;
             // 
             // txt_name
             // 
             this.txt_name.Location = new System.Drawing.Point(109, 238);
             this.txt_name.Name = "txt_name";
             this.txt_name.Size = new System.Drawing.Size(81, 20);
-            this.txt_name.TabIndex = 22;
+            this.txt_name.TabIndex = 5;
             // 
             // txt_weight
             // 
-            this.txt_weight.Location = new System.Drawing.Point(316, 238);
+            this.txt_weight.Location = new System.Drawing.Point(393, 238);
             this.txt_weight.Name = "txt_weight";
             this.txt_weight.Size = new System.Drawing.Size(71, 20);
-            this.txt_weight.TabIndex = 23;
+            this.txt_weight.TabIndex = 8;
             // 
             // txt_height
             // 
-            this.txt_height.Location = new System.Drawing.Point(393, 238);
+            this.txt_height.Location = new System.Drawing.Point(316, 238);
             this.txt_height.Name = "txt_height";
             this.txt_height.Size = new System.Drawing.Size(71, 20);
-            this.txt_height.TabIndex = 24;
+            this.txt_height.TabIndex = 7;
             // 
             // txt_birthday
             // 
             this.txt_birthday.Location = new System.Drawing.Point(203, 238);
             this.txt_birthday.Name = "txt_birthday";
             this.txt_birthday.Size = new System.Drawing.Size(107, 20);
-            this.txt_birthday.TabIndex = 25;
+            this.txt_birthday.TabIndex = 6;
             // 
             // label9
             // 
@@ -329,7 +329,7 @@
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label12.Location = new System.Drawing.Point(313, 220);
+            this.label12.Location = new System.Drawing.Point(390, 220);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(45, 15);
             this.label12.TabIndex = 30;
@@ -339,7 +339,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label13.Location = new System.Drawing.Point(390, 220);
+            this.label13.Location = new System.Drawing.Point(313, 220);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(43, 15);
             this.label13.TabIndex = 31;
@@ -352,7 +352,7 @@
             this.btn_delete.Location = new System.Drawing.Point(352, 132);
             this.btn_delete.Name = "btn_delete";
             this.btn_delete.Size = new System.Drawing.Size(90, 30);
-            this.btn_delete.TabIndex = 33;
+            this.btn_delete.TabIndex = 3;
             this.btn_delete.Text = "Delete";
             this.btn_delete.UseVisualStyleBackColor = false;
             this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);

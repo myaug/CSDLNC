@@ -67,7 +67,7 @@ namespace CSDLNC.SQL
                 var update = Builders<BsonDocument>.Update.Set("player_name", player.Player_name).
                     Set("birthday", player.Birthday).Set("height", player.Height).Set("weight", player.Weight);
                 var sw = Stopwatch.StartNew();
-                collection.UpdateOne(filter, update);
+                collection.UpdateMany(filter, update);
                 sw.Stop();
                 timeExecution = sw.ElapsedMilliseconds;
             }

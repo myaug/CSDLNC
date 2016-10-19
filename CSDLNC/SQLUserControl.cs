@@ -23,7 +23,7 @@ namespace CSDLNC
             InitializeComponent();
             BindNumberOfRecord();
             BindPlayerList();
-            InitInsertData();
+            //InitInsertData();
         }
 
         private void BindNumberOfRecord()
@@ -41,7 +41,7 @@ namespace CSDLNC
             btn_Select.Text = "Selecting";
             btn_Select.Refresh();
 
-            bindingSourcePLayerList.DataSource = helper.Select();
+            bindingSourcePLayerList.DataSource = txt_apiId.Text == "" ? helper.Select() : helper.Select(int.Parse(txt_apiId.Text));
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_Select.Text = "Select";
@@ -93,12 +93,15 @@ namespace CSDLNC
             btn_delete.Text = "Deleting";
             btn_delete.Refresh();
 
-            var selectedRow = playerList.SelectedRows[0];
-            var playerId = int.Parse(selectedRow.Cells["id"].Value.ToString());
-            var player_api_id = int.Parse(selectedRow.Cells["player_api_id"].Value.ToString());
 
-            helper.Delete(playerId, player_api_id);
-            bindingSourcePLayerList.DataSource = helper.Select();
+            helper.Delete(0, int.Parse(txt_apiId.Text));
+
+            //var selectedRow = playerList.SelectedRows[0];
+            //var playerId = int.Parse(selectedRow.Cells["id"].Value.ToString());
+            //var player_api_id = int.Parse(selectedRow.Cells["player_api_id"].Value.ToString());
+
+            //helper.Delete(playerId, player_api_id);
+            //bindingSourcePLayerList.DataSource = helper.Select();
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_delete.Text = "Delete";

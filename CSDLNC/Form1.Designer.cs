@@ -56,7 +56,7 @@
             this.Controls.Add(this.noSQLUserControl1);
             this.Controls.Add(this.sqlUserControl1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Compare SQL and NoSQL - Demo";
             this.ResumeLayout(false);
             this.PerformLayout();
 

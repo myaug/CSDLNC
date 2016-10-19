@@ -9,7 +9,7 @@ namespace CSDLNC.SQL
     {
         //public string connectionString = ConfigurationManager.ConnectionStrings["SQLDatabase"].ToString();
         //private string connectionString = "Data Source =.; Initial Catalog = Soccer; Integrated Security = True";
-        public string connectionString = "Data Source =.\\SQLEXPRESS; Initial Catalog = Soccer; Integrated Security = True";
+        public string connectionString = "Data Source =.; Initial Catalog = CSDLNC; Integrated Security = True";
 
         private SqlConnection connection;
         public long timeExecution = 0;
@@ -58,7 +58,7 @@ namespace CSDLNC.SQL
             }
         }
 
-        public long Delete(int player_id, int player_api_id)
+        public void Delete(int player_id, int player_api_id)
         {
             try
             {
@@ -85,14 +85,14 @@ namespace CSDLNC.SQL
                                                     + "OR M.home_player_8 = @playerId"
                                                     + "OR M.home_player_9 = @playerId"
                                                     + "OR M.home_player_10 = @playerId"
-                                                    + "OR M.home_player_11 = @playerId");
+                                                    + "OR M.home_player_11 = @playerId", connection);
                 deleteMatchCmd.Parameters.AddWithValue("@playerId", player_id);
 
                 var deletePlayerStatCmd = new SqlCommand("delete PS from Player_Stats PS" 
-                                                            + "where PS.player_api_id = @player_api_id");
+                                                            + "where PS.player_api_id = @player_api_id", connection);
                 deletePlayerStatCmd.Parameters.AddWithValue("@player_api_id", player_api_id);
 
-                var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId");
+                var deletePlayerCmd = new SqlCommand("delete from Player where id = @playerId", connection);
                 deletePlayerCmd.Parameters.AddWithValue("@playerId", player_id);
 
                 var sw = Stopwatch.StartNew();
@@ -102,16 +102,15 @@ namespace CSDLNC.SQL
                 deletePlayerCmd.ExecuteNonQuery();
 
                 sw.Stop();
-                return sw.ElapsedMilliseconds;
+                timeExecution = sw.ElapsedMilliseconds;
             }
             catch (Exception ex)
             {
                 CloseConnection();
             }
-            return 0;
         }
 
-        public long Update(Player player)
+        public void Update(Player player)
         {
             try
             {
@@ -130,13 +129,12 @@ namespace CSDLNC.SQL
                 cmd.ExecuteNonQuery();
 
                 sw.Stop();
-                return sw.ElapsedMilliseconds;
+                timeExecution = sw.ElapsedMilliseconds;
         }
             catch (Exception ex)
             {
                 CloseConnection();
             }
-            return 0;
         }
 
         public DataTable Select()

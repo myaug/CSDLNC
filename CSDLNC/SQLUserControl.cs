@@ -93,8 +93,11 @@ namespace CSDLNC
             btn_delete.Text = "Deleting";
             btn_delete.Refresh();
 
+            var selectedRow = playerList.SelectedRows[0];
+            var playerId = int.Parse(selectedRow.Cells["id"].Value.ToString());
+            var player_api_id = int.Parse(selectedRow.Cells["player_api_id"].Value.ToString());
 
-            helper.Update(InitPlayer());
+            helper.Delete(playerId, player_api_id);
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_delete.Text = "Delete";

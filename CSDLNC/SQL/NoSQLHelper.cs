@@ -165,6 +165,33 @@ namespace CSDLNC.SQL
             return players;
         }
 
+        public List<mPlayer> Select(int player_id)
+        {
+            var players = new List<mPlayer>();
+
+            try
+            {
+                var sw = Stopwatch.StartNew();
+                var collection = _database.GetCollection<BsonDocument>("Player");
+                var filter = Builders<BsonDocument>.Filter.Eq("player_id", player_id);
+                var response = collection.Find(filter).ToList();
+                sw.Stop();
+                timeExecution = sw.ElapsedMilliseconds;
+
+                foreach (BsonDocument item in response)
+                {
+                    players.Add(new mPlayer { _id = item["_id"], Player_id = item["player_id"].ToInt32(),
+                        Player_name = item["player_name"].ToString(), Birthday = item["birthday"].ToString(),
+                        Height = item["height"].ToInt32(), Weight = item["weight"].ToInt32() });
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return players;
+        }
+
         public async Task<long> NumberOfRecord(string collectionName)
         {
             try

@@ -23,7 +23,7 @@ namespace CSDLNC
             InitializeComponent();
             BindNumberOfRecord();
             BindPlayerList();
-            InitInsertData();
+            //InitInsertData();
         }
 
         public async void BindNumberOfRecord()
@@ -41,7 +41,7 @@ namespace CSDLNC
             btn_Select.Text = "Selecting";
             btn_Select.Refresh();
 
-            bindingSourcePLayerList.DataSource = helper.Select();
+            bindingSourcePLayerList.DataSource = txt_apiId.Text == "" ? helper.Select() : helper.Select(int.Parse(txt_apiId.Text));
 
             lbl_time.Text = helper.timeExecution + timeExecutionSuffix;
             btn_Select.Text = "Select";

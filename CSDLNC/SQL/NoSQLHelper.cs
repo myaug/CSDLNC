@@ -92,11 +92,12 @@ namespace CSDLNC.SQL
                         { "Height", new BsonDocument("$first", "$height") }, { "Weight", new BsonDocument("$first", "$weight") },
                         { "Overall_rating", new BsonDocument("$max", "$Player_Stats.overall_rating") } })
                     .Sort(new BsonDocument("Overall_rating", -1))
-                    .Limit(1000).ToList();
+                    .Limit(1000);
                 sw.Stop();
                 timeExecution = sw.ElapsedMilliseconds;
+                var list = response.ToList();
 
-                foreach (BsonDocument item in response)
+                foreach (BsonDocument item in list)
                 {
                     players.Add(BsonSerializer.Deserialize<mPlayer>(item));
                 }
@@ -118,11 +119,12 @@ namespace CSDLNC.SQL
                 var collection = _database.GetCollection<BsonDocument>("Player");
                 var filter = Builders<BsonDocument>.Filter.Eq("player_id", player_id);
                 var sw = Stopwatch.StartNew();
-                var response = collection.Find(filter).ToList();
+                var response = collection.Find(filter);
                 sw.Stop();
                 timeExecution = sw.ElapsedMilliseconds;
+                var list = response.ToList();
 
-                foreach (BsonDocument item in response)
+                foreach (BsonDocument item in list)
                 {
                     players.Add(new mPlayer { _id = item["_id"], Player_id = item["player_id"].ToInt32(),
                         Player_name = item["player_name"].ToString(), Birthday = item["birthday"].ToString(),
